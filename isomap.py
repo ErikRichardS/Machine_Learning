@@ -65,14 +65,14 @@ def floyd_warshall(graph_matrix):
 
 
 
-mat, zoo_type = get_data_matrix()
+#mat, zoo_type = get_data_matrix()
 
-dist_mat = create_distance_matrix(mat)
+#dist_mat = create_distance_matrix(mat)
 
-graph_mat = create_isomap_graph(dist_mat)
+#graph_mat = create_isomap_graph(dist_mat)
 
-graph_dist_mat = floyd_warshall(graph_mat)
+#graph_dist_mat = floyd_warshall(graph_mat)
 
 
 
-mds(graph_dist_mat)
+#mds(graph_dist_mat)

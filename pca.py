@@ -22,20 +22,22 @@ def svd(matrix):
 
 
 def pca(matrix):
-	mat = center_matrix(mat)
+	mat = center_matrix(matrix)
 
 	u, s, vh = svd(mat)
 	uk = np.transpose(u[:,:2] )
 
 	x = uk @ mat
 
-	show_data(x, zoo_type)
+	return x
 
 
 
 
 
-mat, zoo_type = get_data_matrix()
+
+
+#mat, zoo_type = get_data_matrix()
 
 
 

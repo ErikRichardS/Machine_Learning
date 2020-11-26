@@ -3,3 +3,54 @@ import numpy as np
 from settings import *
 from data_loader import *
 from pca import *
+from mds import *
+from isomap import *
+
+import sys
+
+def shutdown():
+	print("Exit program")
+	sys.exit()
+
+
+if len(sys.argv) < 2:
+	shutdown()
+
+
+arg = sys.argv[1]
+
+
+
+mat, zoo_type = get_data_matrix()
+x = None
+
+if arg == "pca":
+	x = pca(mat)
+	
+if arg == "mds-data":
+	mat = center_matrix(mat)
+	x = mds_data(mat)
+
+if arg == "mds-dist":
+	mat = center_matrix(mat)
+	dist_mat = create_distance_matrix(mat)
+	x = mds(dist_mat)
+
+if arg == "mds-pca":
+	mat = center_matrix(mat)
+	x = pca_mds(dist_mat)
+
+if arg == "isomap":
+	try:
+		neighbor = int(sys.argv[2])
+		dist_mat = create_distance_matrix(mat)
+		graph_mat = create_isomap_graph(dist_mat, p=neighbor)
+		graph_dist_mat = floyd_warshall(graph_mat)
+
+		x = mds(graph_dist_mat)
+	except:
+		print("Isomap neighbor argument invalid")
+		shutdown()
+	
+
+show_data(x, zoo_type)

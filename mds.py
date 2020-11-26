@@ -4,7 +4,7 @@ from scipy.linalg import sqrtm
 
 from settings import *
 from data_loader import *
-from pca import center_matrix
+from pca import *
 
 
 import matplotlib.pyplot as plt
@@ -62,7 +62,7 @@ def mds(distance_matrix):
 	x = v @ ut
 	x = np.real(x)
 
-	show_data(x, zoo_type)
+	return x
 
 
 
@@ -76,17 +76,25 @@ def mds_data(matrix):
 	x = v @ ut
 	x = np.real(x)
 
-	show_data(x, zoo_type)
+	return x
 
 
 
+def pca_mds(matrix):
+	u, s, vh = svd(matrix)
+	uk = np.transpose(u[:,:12] )
+
+	mat = uk @ matrix
+
+	dist_mat = create_distance_matrix(mat)
+
+	return mds(dist_mat)
 
 
-mat, zoo_type = get_data_matrix()
 
-#dist_mat = create_distance_matrix(mat)
+#mat, zoo_type = get_data_matrix()
+#mat = center_matrix(mat)
 
-#mds(dist_mat)
 
 
 #mat = center_matrix(mat)
