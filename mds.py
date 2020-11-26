@@ -3,7 +3,7 @@ import numpy as np
 from scipy.linalg import sqrtm
 
 from settings import *
-from data_loader import *
+from data_handler import *
 from pca import *
 
 

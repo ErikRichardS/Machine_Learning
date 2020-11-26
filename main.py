@@ -1,7 +1,7 @@
 import numpy as np
 
 from settings import *
-from data_loader import *
+from data_handler import *
 from pca import *
 from mds import *
 from isomap import *
@@ -22,7 +22,7 @@ arg = sys.argv[1]
 
 
 
-mat, zoo_type = get_data_matrix()
+mat, zoo_type, zoo_name = get_data_matrix()
 x = None
 
 if arg == "pca":
@@ -62,4 +62,4 @@ else:
 	shutdown()
 
 
-show_data(x, zoo_type)
+show_data(x, zoo_type, zoo_name)

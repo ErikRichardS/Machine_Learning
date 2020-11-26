@@ -1,7 +1,7 @@
 import numpy as np
 
 from settings import *
-from data_loader import *
+from data_handler import *
 
 import matplotlib.pyplot as plt
 
