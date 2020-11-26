@@ -65,7 +65,6 @@ def mds(distance_matrix):
 	return x
 
 
-
 def mds_data(matrix):
 	sim_mat = data_to_similarity_matrix(matrix)
 
@@ -79,7 +78,6 @@ def mds_data(matrix):
 	return x
 
 
-
 def pca_mds(matrix):
 	u, s, vh = svd(matrix)
 	uk = np.transpose(u[:,:12] )
@@ -90,9 +88,25 @@ def pca_mds(matrix):
 
 	return mds(dist_mat)
 
+def mds_weighted(matrix, center=True):
+	matrix[-1] /= 4 # Catsize
+	matrix[-2] /= 2 # Domestic
+	matrix[-4] /= 4 # Nr legs
+
+	if center:
+		matrix = center_matrix(matrix)
+
+	dist_mat = create_distance_matrix(matrix)
+
+	return mds(dist_mat)
+	
+
 
 
 #mat, zoo_type = get_data_matrix()
+
+#mds_weighted(mat)
+
 #mat = center_matrix(mat)
 
 

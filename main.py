@@ -14,6 +14,7 @@ def shutdown():
 
 
 if len(sys.argv) < 2:
+	print("Missing argument")
 	shutdown()
 
 
@@ -27,20 +28,24 @@ x = None
 if arg == "pca":
 	x = pca(mat)
 	
-if arg == "mds-data":
+elif arg == "mds-data":
 	mat = center_matrix(mat)
 	x = mds_data(mat)
 
-if arg == "mds-dist":
+elif arg == "mds-dist":
 	mat = center_matrix(mat)
 	dist_mat = create_distance_matrix(mat)
 	x = mds(dist_mat)
 
-if arg == "mds-pca":
-	mat = center_matrix(mat)
-	x = pca_mds(dist_mat)
+elif arg == "mds-weight":
+	x = mds_weighted(mat)
 
-if arg == "isomap":
+
+elif arg == "mds-pca":
+	mat = center_matrix(mat)
+	x = pca_mds(mat)
+
+elif arg == "isomap":
 	try:
 		neighbor = int(sys.argv[2])
 		dist_mat = create_distance_matrix(mat)
@@ -52,5 +57,9 @@ if arg == "isomap":
 		print("Isomap neighbor argument invalid")
 		shutdown()
 	
+else:
+	print("Invalid argument")
+	shutdown()
+
 
 show_data(x, zoo_type)
