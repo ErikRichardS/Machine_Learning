@@ -26,7 +26,21 @@ mat, zoo_type, zoo_name = get_data_matrix()
 x = None
 
 if arg == "pca":
-	x = pca(mat)
+	if len(sys.argv) < 3:
+		x = pca(mat)
+	elif len(sys.argv) == 3:
+		print("Invalid number of PCA integer arguments")
+		shutdown()
+	else:
+		try:
+			t1 = int(sys.argv[2])
+			t2 = int(sys.argv[3])
+			x = pca(mat, [t1, t2])
+		except:
+			print("PCA integer argument invalid")
+			shutdown()
+
+	
 	
 elif arg == "mds-data":
 	mat = center_matrix(mat)

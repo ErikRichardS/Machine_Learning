@@ -21,11 +21,11 @@ def svd(matrix):
 
 
 
-def pca(matrix):
+def pca(matrix, idx=[0,1]):
 	mat = center_matrix(matrix)
 
 	u, s, vh = svd(mat)
-	uk = np.transpose(u[:,:2] )
+	uk = np.transpose(u[:,idx] )
 
 	x = uk @ mat
 
