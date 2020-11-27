@@ -15,10 +15,24 @@ def shutdown():
 
 if len(sys.argv) < 2:
 	print("Missing argument")
+	print("Use \'help\' to list usable arguments")
 	shutdown()
 
 
 arg = sys.argv[1]
+
+
+
+if arg == "help":
+	print("Usable commands:")
+	arg_list = ["pca", "mds-data", "mds-dist", "mds-weight", "mds-pca", "isomap"]
+	for ar in arg_list:
+		print(ar)
+
+	print()
+	print("pca - can be followed by two distinct integers between 0 and 15 for custom use of columns")
+	print("isomap - must be followed by a positive integer determining the number of nearest neighbors")
+	shutdown()
 
 
 
@@ -40,8 +54,6 @@ if arg == "pca":
 			print("PCA integer argument invalid")
 			shutdown()
 
-	
-	
 elif arg == "mds-data":
 	mat = center_matrix(mat)
 	x = mds_data(mat)
@@ -53,7 +65,6 @@ elif arg == "mds-dist":
 
 elif arg == "mds-weight":
 	x = mds_weighted(mat)
-
 
 elif arg == "mds-pca":
 	mat = center_matrix(mat)
